@@ -1,0 +1,36 @@
+.step3 {
+  display: flex;
+  justify-content: center;
+}
+.step3 img {
+  width: 40px;
+}
+
+.step3 .messageInfo {
+  display: grid;
+  grid-template-columns: 40px auto;
+  column-gap: 20px;
+}
+
+.step3 .messageInfo p {
+  margin-bottom: 0;
+}
+
+.step3 .spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #09f;
+
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

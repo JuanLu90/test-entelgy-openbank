@@ -2,7 +2,6 @@
   display: grid;
   grid-template-rows: 80px auto 80px;
   width: 800px;
-  height: 750px;
   box-shadow: 0 0 5px 1px lightgray;
 }
 
@@ -33,7 +32,7 @@
 }
 
 .wizard__header .stepNumber.done {
-  background-color: #df0a49;
+  background-color: #ff0049;
 }
 
 .wizard__body {
@@ -68,6 +67,21 @@
   margin: auto 0;
   color: white;
   background-color: #092b45;
+  font-weight: bolder;
+  border: none;
+  cursor: pointer;
+}
+.wizard__footer_thirdStep {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.wizard__footer_thirdStep .nextButton {
+  width: 100px;
+  margin: auto 0;
+  height: 40px;
+  color: #ff0049;
+  background-color: transparent;
   font-weight: bolder;
   border: none;
   cursor: pointer;

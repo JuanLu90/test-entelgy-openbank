@@ -12,6 +12,12 @@ i18n.use(initReactI18next).init({
           cancelBtn: "Cancelar",
           nextBtn: "Siguiente",
           submitBtn: "Enviar",
+          noPassword: "Introduce la contraseña",
+          confirmPassword: "Confirma la contraseña",
+          invalidPassword: "Contraseña no válida",
+          differencePassword: "La contraseña no coincide",
+          clueLong: "La pista es demasiado larga",
+          accessBtn: "Acceder",
         },
         step1: {
           brainDescription:
@@ -40,6 +46,17 @@ i18n.use(initReactI18next).init({
             "También puedes crear una pista que te ayude a recordar tu contraseña maestra.",
           clueTitle: "Crea tu pista para recordar tu contraseña (opcional):",
           clue: "Introduce tu pista",
+        },
+        step3: {
+          OK: {
+            title: "¡Tu Password Manager ya está creado!",
+            description: "Prueba terminada, ¡olé!",
+          },
+          KO: {
+            title: "Ha habido un error",
+            description:
+              "No hemos podido modificar tu Contraseña Maestr. Inténtalo más tarde",
+          },
         },
       },
     },

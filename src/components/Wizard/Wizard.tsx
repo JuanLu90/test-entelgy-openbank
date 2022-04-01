@@ -29,6 +29,10 @@ interface IStep {
   isDone: boolean;
 }
 
+interface IResponse {
+  status: number;
+}
+
 // FUNCTION
 const Wizard: React.FC = () => {
   const { t } = useTranslation();
@@ -75,6 +79,9 @@ const Wizard: React.FC = () => {
   ]);
 
   const [activeStep, setActiveStep] = useState(steps[0]);
+  const [statusResponse, setStatusResponse] = useState<IResponse>({
+    status: 0,
+  });
 
   const validateLogin = () => {
     if (activeStep.key !== "secondStep") return true;
@@ -82,15 +89,15 @@ const Wizard: React.FC = () => {
     const { password, confirmPassword, clue } = credentials;
     const errors: any = {};
 
-    if (!password) errors.password = "Password is required.";
+    if (!password) errors.password = t("wizard.noPassword");
     else if (!validatePassword(password))
-      errors.password = "Enter a valid password.";
+      errors.password = t("wizard.invalidPassword");
 
-    if (!confirmPassword) errors.confirmPassword = "Confirm the password";
+    if (!confirmPassword) errors.confirmPassword = t("wizard.confirmPassword");
     else if (password !== confirmPassword)
-      errors.confirmPassword = "Passwords dont match";
+      errors.confirmPassword = t("wizard.differencePassword");
 
-    if (!validateClue(clue)) errors.clue = "Clue too long";
+    if (!validateClue(clue)) errors.clue = t("wizard.clueLong");
 
     setErrorState(errors);
     return Object.keys(errors).length === 0;
@@ -111,10 +118,6 @@ const Wizard: React.FC = () => {
 
   const nextButton = async () => {
     if (!validateLogin()) return;
-    if (steps[steps.length - 1].key === activeStep.key) {
-      alert("You have completed all steps.");
-      return;
-    }
 
     const index = steps.findIndex((x: any) => x.key === activeStep.key);
     setSteps((prevStep: any) =>
@@ -128,9 +131,11 @@ const Wizard: React.FC = () => {
     if (activeStep.key === "secondStep") {
       setLoading(true);
       try {
-        const response = await submitForm("pruebaKO123");
+        const response = await submitForm(credentials.password);
+        setStatusResponse(response);
         setLoading(false);
-      } catch (error) {
+      } catch (error: any) {
+        setStatusResponse(error);
         setLoading(false);
       }
     }
@@ -153,7 +158,7 @@ const Wizard: React.FC = () => {
         })}
       </div>
       <div className="wizard__body">
-        <h2> {t("wizard.title")}</h2>
+        {activeStep.key !== "thirdStep" && <h2> {t("wizard.title")}</h2>}
         {activeStep.key === "firstStep" && <Step1 />}
         {activeStep.key === "secondStep" && (
           <Step2
@@ -162,22 +167,35 @@ const Wizard: React.FC = () => {
             handleChange={handleChange}
           />
         )}
-        {activeStep.key === "thirdStep" && <Step3 loading={loading} />}
+        {activeStep.key === "thirdStep" && (
+          <Step3 loading={loading} response={statusResponse} />
+        )}
       </div>
-      <div className="wizard__footer">
-        <button
-          onClick={backButton}
-          className="cancelButton"
-          disabled={steps[0].key === activeStep.key}
-        >
-          {t("wizard.cancelBtn")}
-        </button>
-        <button onClick={nextButton} className="nextButton">
-          {steps[steps.length - 1].key !== activeStep.key
-            ? t("wizard.nextBtn")
-            : t("wizard.submitBtn")}
-        </button>
-      </div>
+      {activeStep.key === "thirdStep" ? (
+        <div className="wizard__footer_thirdStep">
+          <button
+            onClick={() => setActiveStep(steps[0])}
+            className="nextButton"
+          >
+            {t("wizard.accessBtn")}
+          </button>
+        </div>
+      ) : (
+        <div className="wizard__footer">
+          <button
+            onClick={backButton}
+            className="cancelButton"
+            disabled={steps[0].key === activeStep.key}
+          >
+            {t("wizard.cancelBtn")}
+          </button>
+          <button onClick={nextButton} className="nextButton">
+            {steps[steps.length - 1].key !== activeStep.key
+              ? t("wizard.nextBtn")
+              : t("wizard.submitBtn")}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

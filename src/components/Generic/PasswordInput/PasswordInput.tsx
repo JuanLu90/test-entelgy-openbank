@@ -1,5 +1,12 @@
+// DEPENDENCES
+import { useState } from "react";
+
 // STYLES
 import "./PasswordInput.css";
+
+// IMAGES
+import closeEyeIcon from "../../../assets/img/closeeye.png";
+import openEyeIcon from "../../../assets/img/openeye.png";
 
 // INTERFACE
 interface IProps {
@@ -9,32 +16,34 @@ interface IProps {
   placeholder: string;
   error: string;
   name: string;
-  type?: string;
 }
 
 // FUNCTION
 const PasswordInput: React.FC<IProps> = (props) => {
-  const {
-    label,
-    value,
-    handleChange,
-    type = "password",
-    placeholder,
-    error,
-    name,
-  } = props;
+  const { label, value, handleChange, placeholder, error, name } = props;
+
+  const [eyeState, setEyeState] = useState(false);
 
   return (
     <div className="passwordInputs">
       <label htmlFor="">{label}</label>
-      <input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={handleChange}
-      />
-      <span>{error}&nbsp;</span>
+      <div>
+        <input
+          type={eyeState ? "text" : "password"}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={handleChange}
+          className={error ? "errorInput" : ""}
+        />
+        <img
+          src={eyeState ? closeEyeIcon : openEyeIcon}
+          onClick={() => setEyeState(!eyeState)}
+          alt="Show Password"
+        />
+      </div>
+
+      <span className="errorMessage">{error}&nbsp;</span>
     </div>
   );
 };
