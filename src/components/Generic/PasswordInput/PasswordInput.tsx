@@ -1,6 +1,9 @@
 // DEPENDENCES
 import { useState } from "react";
 
+// UTILS
+import { IInput } from "../../../utils/typescriptUtil";
+
 // STYLES
 import "./PasswordInput.less";
 
@@ -8,18 +11,8 @@ import "./PasswordInput.less";
 import closeEyeIcon from "../../../assets/img/closeeye.png";
 import openEyeIcon from "../../../assets/img/openeye.png";
 
-// INTERFACE
-interface IProps {
-  label: string;
-  value: string;
-  handleChange: any;
-  placeholder: string;
-  error: string;
-  name: string;
-}
-
 // FUNCTION
-const PasswordInput: React.FC<IProps> = (props) => {
+const PasswordInput: React.FC<IInput> = (props) => {
   const { label, value, handleChange, placeholder, error, name } = props;
 
   const [eyeState, setEyeState] = useState(false);

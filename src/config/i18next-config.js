@@ -55,7 +55,7 @@ i18n.use(initReactI18next).init({
           KO: {
             title: "Ha habido un error",
             description:
-              "No hemos podido modificar tu Contraseña Maestr. Inténtalo más tarde",
+              "No hemos podido modificar tu Contraseña Maestra. Inténtalo más tarde",
           },
         },
       },

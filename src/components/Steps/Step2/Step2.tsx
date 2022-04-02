@@ -5,26 +5,14 @@ import { useTranslation } from "react-i18next";
 import PasswordInputs from "../../Generic/PasswordInput/PasswordInput";
 import TextInput from "../../Generic/TextInput/TextInput";
 
+// UTILS
+import { IStep2 } from "../../../utils/typescriptUtil";
+
 // STYLES
 import "./Step2.less";
 
-// INTERFACES
-interface IProps {
-  credentials: {
-    password: string;
-    confirmPassword: string;
-    clue: string;
-  };
-  errorState: {
-    password: string;
-    confirmPassword: string;
-    clue: string;
-  };
-  handleChange: any;
-}
-
 // FUNCTION
-const Step2: React.FC<IProps> = (props) => {
+const Step2: React.FC<IStep2> = (props) => {
   const { t } = useTranslation();
 
   const { credentials, errorState, handleChange } = props;

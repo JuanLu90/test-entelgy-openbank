@@ -1,15 +1,24 @@
+@import "../../../styles/base.less";
+
 .wizard__footer {
   display: flex;
   justify-content: space-between;
   align-content: center;
   padding: 15px 80px;
-  border-top: 1px solid lightgray;
+  border-top: 1px solid @tertiary-color;
+
+  .buttonsWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    width: 100%;
+  }
 
   .cancelButton {
     width: 100px;
     margin: auto 0;
     height: 40px;
-    color: #092b45;
+    color: @secondary-color;
     background-color: transparent;
     font-weight: bolder;
     border: none;
@@ -20,27 +29,36 @@
     width: 100px;
     height: 40px;
     margin: auto 0;
-    color: white;
-    background-color: #092b45;
+    color: @white;
+    background-color: @secondary-color;
     font-weight: bolder;
     border: none;
     cursor: pointer;
+  }
+
+  .thirdStepButton {
+    display: flex;
+    justify-content: end;
+    align-content: center;
+    width: 100%;
+
+    .accessButton {
+      width: 100px;
+      margin: auto 0;
+      height: 40px;
+      color: @primary-color;
+      background-color: transparent;
+      font-weight: bolder;
+      border: none;
+      cursor: pointer;
+    }
   }
 }
 
 .wizard__footer_thirdStep {
   display: flex;
-  align-items: center;
-  justify-content: end;
-
-  .nextButton {
-    width: 100px;
-    margin: auto 0;
-    height: 40px;
-    color: #ff0049;
-    background-color: transparent;
-    font-weight: bolder;
-    border: none;
-    cursor: pointer;
-  }
+  justify-content: space-between;
+  align-content: center;
+  padding: 15px 80px;
+  border-top: 1px solid #ccd5da;
 }

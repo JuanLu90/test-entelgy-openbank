@@ -1,5 +1,5 @@
 // DEPENDENCES
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 // COMPONENTS
@@ -11,26 +11,13 @@ import Header from "./Header/Header";
 
 // UTILS
 import { validatePassword, validateClue } from "../../utils/validationUtil";
+import { IStep, ICredentials, IResponse } from "../../utils/typescriptUtil";
+
+// SERVICES
 import { submitForm } from "../../services/api";
 
 // STYLES
 import "./Wizard.less";
-
-// INTERFACE
-interface ICredentials {
-  password: string;
-  confirmPassword: string;
-  clue: string;
-}
-
-interface IStep {
-  position: number;
-  isDone: boolean;
-}
-
-interface IResponse {
-  status: number;
-}
 
 // FUNCTION
 const Wizard: React.FC = () => {
@@ -74,7 +61,7 @@ const Wizard: React.FC = () => {
     },
   ]);
 
-  const [activeStep, setActiveStep] = useState(steps[0]);
+  const [activeStep, setActiveStep] = useState<IStep>(steps[0]);
   const [statusResponse, setStatusResponse] = useState<IResponse>({
     status: 0,
   });
@@ -127,6 +114,13 @@ const Wizard: React.FC = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (activeStep.position === 1) {
+      setCredentials(initialCredentials);
+      setStatusResponse({ status: 0 });
+    }
+  }, [activeStep, initialCredentials]);
 
   return (
     <div className="wizard">

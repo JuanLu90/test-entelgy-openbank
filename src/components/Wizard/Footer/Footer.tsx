@@ -1,21 +1,18 @@
 // DEPENDENCES
 import { useTranslation } from "react-i18next";
 
+// UTILS
+import { IStep } from "../../../utils/typescriptUtil";
+
 // STYLES
 import "./Footer.less";
 
-// INTERFACES
-interface IStep {
-  position: number;
-  isDone: boolean;
-}
-
 interface IProps {
   activeStep: number;
-  setActiveStep: any;
+  setActiveStep: React.SetStateAction<any>;
   steps: IStep[];
-  backButton: any;
-  nextButton: any;
+  backButton: () => void;
+  nextButton: () => void;
 }
 
 // FUNCTION
@@ -25,18 +22,18 @@ const Footer: React.FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <div className="wizard__footer">
       {activeStep === 3 ? (
-        <div className="wizard__footer_thirdStep">
+        <div className="thirdStepButton">
           <button
             onClick={() => setActiveStep(steps[0])}
-            className="nextButton"
+            className="accessButton"
           >
             {t("wizard.accessBtn")}
           </button>
         </div>
       ) : (
-        <div className="wizard__footer">
+        <div className="buttonsWrapper">
           <button
             onClick={backButton}
             className="cancelButton"

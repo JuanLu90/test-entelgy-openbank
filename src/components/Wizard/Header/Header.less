@@ -1,8 +1,10 @@
+@import "../../../styles/base.less";
+
 .wizard__header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ccd5da;
+  background-color: @tertiary-color;
 
   .stepNumber {
     display: flex;
@@ -11,19 +13,19 @@
     width: 28px;
     height: 26px;
     margin: 0 20px;
-    color: white;
-    background-color: #788e9c;
+    color: @white;
+    background-color: @quaternary-color;
     border-radius: 100%;
 
     &.active {
-      background-color: #092b45;
+      background-color: @secondary-color;
       width: 35px;
       height: 35px;
-      box-shadow: 0 0 2px 2px black;
+      box-shadow: 0 0 2px 2px @black;
     }
 
     &.done {
-      background-color: #ff0049;
+      background-color: @primary-color;
     }
 
     img {

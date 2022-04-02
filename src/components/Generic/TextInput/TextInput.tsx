@@ -1,18 +1,10 @@
+// UTILS
+import { IInput } from "../../../utils/typescriptUtil";
 // STYLES
 import "./TextInput.less";
 
-// INTERFACE
-interface IProps {
-  label: string;
-  value: string;
-  handleChange: any;
-  placeholder: string;
-  error: string;
-  name: string;
-}
-
 // FUNCTION
-const TextInput: React.FC<IProps> = (props) => {
+const TextInput: React.FC<IInput> = (props) => {
   const { label, value, handleChange, placeholder, error, name } = props;
 
   return (

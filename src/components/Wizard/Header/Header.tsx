@@ -1,30 +1,23 @@
+// DEPEDENCES
+import { useEffect } from "react";
+
+// UTILS
+import { IStep, IWizardHeader } from "../../../utils/typescriptUtil";
+
 // IMAGES
 import tickIcon from "../../../assets/img/tick.png";
 
 // STYLES
-import { useEffect } from "react";
 import "./Header.less";
 
-// INTERFACES
-interface IStep {
-  position: number;
-  isDone: boolean;
-}
-
-interface IProps {
-  activeStep: number;
-  steps: IStep[];
-  setSteps: any;
-}
-
 // FUNCTION
-const Header: React.FC<IProps> = (props) => {
+const Header: React.FC<IWizardHeader> = (props) => {
   const { activeStep, steps, setSteps } = props;
 
   useEffect(
     () =>
-      setSteps((prevStep: any) =>
-        prevStep.map((x: any) => {
+      setSteps((prevStep: IStep[]) =>
+        prevStep.map((x) => {
           if (x.position < activeStep) x.isDone = true;
           else x.isDone = false;
           return x;
@@ -33,6 +26,7 @@ const Header: React.FC<IProps> = (props) => {
 
     [activeStep, setSteps]
   );
+
   return (
     <div className="wizard__header">
       {steps.map((step, i) => {
