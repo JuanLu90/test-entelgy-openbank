@@ -1,5 +1,5 @@
 // STYLES
-import "./TextInput.css";
+import "./TextInput.less";
 
 // INTERFACE
 interface IProps {

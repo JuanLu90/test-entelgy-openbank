@@ -2,7 +2,7 @@
 import Wizard from "../Wizard/Wizard";
 
 // STYLES
-import "./Main.css";
+import "./Main.less";
 
 // FUNCTION
 const Main: React.FC = () => {

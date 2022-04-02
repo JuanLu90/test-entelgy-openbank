@@ -6,15 +6,15 @@ import { useTranslation } from "react-i18next";
 import Step1 from "../Steps/Step1/Step1";
 import Step2 from "../Steps/Step2/Step2";
 import Step3 from "../Steps/Step3/Step3";
+import Footer from "./Footer/Footer";
+import Header from "./Header/Header";
 
 // UTILS
 import { validatePassword, validateClue } from "../../utils/validationUtil";
-
-// UTILS
 import { submitForm } from "../../services/api";
 
 // STYLES
-import "./Wizard.css";
+import "./Wizard.less";
 
 // INTERFACE
 interface ICredentials {
@@ -24,8 +24,7 @@ interface ICredentials {
 }
 
 interface IStep {
-  label: number;
-  key: string;
+  position: number;
   isDone: boolean;
 }
 
@@ -62,18 +61,15 @@ const Wizard: React.FC = () => {
 
   const [steps, setSteps] = useState<IStep[]>([
     {
-      label: 1,
-      key: "firstStep",
+      position: 1,
       isDone: false,
     },
     {
-      label: 2,
-      key: "secondStep",
+      position: 2,
       isDone: false,
     },
     {
-      label: 3,
-      key: "thirdStep",
+      position: 3,
       isDone: false,
     },
   ]);
@@ -84,7 +80,7 @@ const Wizard: React.FC = () => {
   });
 
   const validateLogin = () => {
-    if (activeStep.key !== "secondStep") return true;
+    if (activeStep.position !== 2) return true;
 
     const { password, confirmPassword, clue } = credentials;
     const errors: any = {};
@@ -104,31 +100,22 @@ const Wizard: React.FC = () => {
   };
 
   const backButton = () => {
-    const index = steps.findIndex((x) => x.key === activeStep.key);
+    const index = steps.findIndex((x) => x.position === activeStep.position);
     if (index === 0) return;
 
-    setSteps((prevStep) =>
-      prevStep.map((x) => {
-        if (x.key === activeStep.key) x.isDone = false;
-        return x;
-      })
-    );
     setActiveStep(steps[index - 1]);
   };
 
   const nextButton = async () => {
     if (!validateLogin()) return;
 
-    const index = steps.findIndex((x: any) => x.key === activeStep.key);
-    setSteps((prevStep: any) =>
-      prevStep.map((x: any) => {
-        if (x.key === activeStep.key) x.isDone = true;
-        return x;
-      })
+    const index = steps.findIndex(
+      (x: any) => x.position === activeStep.position
     );
+
     setActiveStep(steps[index + 1]);
 
-    if (activeStep.key === "secondStep") {
+    if (activeStep.position === 2) {
       setLoading(true);
       try {
         const response = await submitForm(credentials.password);
@@ -143,59 +130,32 @@ const Wizard: React.FC = () => {
 
   return (
     <div className="wizard">
-      <div className="wizard__header">
-        {steps.map((step, i) => {
-          return (
-            <div
-              key={i}
-              className={`stepNumber ${
-                activeStep.key === step.key ? "active" : ""
-              } ${step.isDone ? "done" : ""}`}
-            >
-              <span>{step.label}</span>
-            </div>
-          );
-        })}
-      </div>
+      <Header
+        activeStep={activeStep.position}
+        setSteps={setSteps}
+        steps={steps}
+      />
       <div className="wizard__body">
-        {activeStep.key !== "thirdStep" && <h2> {t("wizard.title")}</h2>}
-        {activeStep.key === "firstStep" && <Step1 />}
-        {activeStep.key === "secondStep" && (
+        {activeStep.position !== 3 && <h2> {t("wizard.title")}</h2>}
+        {activeStep.position === 1 && <Step1 />}
+        {activeStep.position === 2 && (
           <Step2
             credentials={credentials}
             errorState={errorState}
             handleChange={handleChange}
           />
         )}
-        {activeStep.key === "thirdStep" && (
+        {activeStep.position === 3 && (
           <Step3 loading={loading} response={statusResponse} />
         )}
       </div>
-      {activeStep.key === "thirdStep" ? (
-        <div className="wizard__footer_thirdStep">
-          <button
-            onClick={() => setActiveStep(steps[0])}
-            className="nextButton"
-          >
-            {t("wizard.accessBtn")}
-          </button>
-        </div>
-      ) : (
-        <div className="wizard__footer">
-          <button
-            onClick={backButton}
-            className="cancelButton"
-            disabled={steps[0].key === activeStep.key}
-          >
-            {t("wizard.cancelBtn")}
-          </button>
-          <button onClick={nextButton} className="nextButton">
-            {steps[steps.length - 1].key !== activeStep.key
-              ? t("wizard.nextBtn")
-              : t("wizard.submitBtn")}
-          </button>
-        </div>
-      )}
+      <Footer
+        activeStep={activeStep.position}
+        setActiveStep={setActiveStep}
+        steps={steps}
+        nextButton={nextButton}
+        backButton={backButton}
+      />
     </div>
   );
 };

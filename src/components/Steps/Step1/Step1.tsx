@@ -2,7 +2,7 @@
 import { useTranslation } from "react-i18next";
 
 // STYLES
-import "./Step1.css";
+import "./Step1.less";
 
 // IMAGES
 import brainImage from "../../../assets/img/group.svg";

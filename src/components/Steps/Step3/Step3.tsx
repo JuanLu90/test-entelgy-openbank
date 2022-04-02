@@ -2,7 +2,7 @@
 import { useTranslation } from "react-i18next";
 
 // STYLES
-import "./Step3.css";
+import "./Step3.less";
 
 // IMAGES
 import tickGreen from "../../../assets/img/accept.png";

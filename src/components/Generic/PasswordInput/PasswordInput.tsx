@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // STYLES
-import "./PasswordInput.css";
+import "./PasswordInput.less";
 
 // IMAGES
 import closeEyeIcon from "../../../assets/img/closeeye.png";

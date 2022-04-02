@@ -6,7 +6,7 @@ import PasswordInputs from "../../Generic/PasswordInput/PasswordInput";
 import TextInput from "../../Generic/TextInput/TextInput";
 
 // STYLES
-import "./Step2.css";
+import "./Step2.less";
 
 // INTERFACES
 interface IProps {

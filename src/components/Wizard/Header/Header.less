@@ -1,0 +1,33 @@
+.wizard__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccd5da;
+
+  .stepNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 26px;
+    margin: 0 20px;
+    color: white;
+    background-color: #788e9c;
+    border-radius: 100%;
+
+    &.active {
+      background-color: #092b45;
+      width: 35px;
+      height: 35px;
+      box-shadow: 0 0 2px 2px black;
+    }
+
+    &.done {
+      background-color: #ff0049;
+    }
+
+    img {
+      width: 12px;
+    }
+  }
+}
