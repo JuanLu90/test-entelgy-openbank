@@ -1,4 +1,5 @@
 // DEPENDENCES
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 // COMPONENTS
@@ -15,13 +16,27 @@ import "./Step2.less";
 const Step2: React.FC<IStep2> = (props) => {
   const { t } = useTranslation();
 
-  const { credentials, errorState, handleChange } = props;
+  const {
+    credentials,
+    setCredentials,
+    initialCredentials,
+    errorState,
+    handleChange,
+    setErrorState,
+  } = props;
+
+  useEffect(() => {
+    return () => {
+      setCredentials(initialCredentials);
+      setErrorState(initialCredentials);
+    };
+  }, []);
 
   return (
     <div className="step2">
-      <div className="step2__password">
+      <article className="step2__password">
         <p>{t("step2.description")}</p>
-        <div>
+        <section>
           <PasswordInputs
             label={t("step2.passwordTitle")}
             placeholder={t("step2.password")}
@@ -38,9 +53,9 @@ const Step2: React.FC<IStep2> = (props) => {
             name="confirmPassword"
             handleChange={handleChange}
           />
-        </div>
-      </div>
-      <div className="step1__clue">
+        </section>
+      </article>
+      <article className="step1__clue">
         <p>{t("step2.description2")}</p>
         <TextInput
           label={t("step2.clueTitle")}
@@ -50,7 +65,7 @@ const Step2: React.FC<IStep2> = (props) => {
           name="clue"
           handleChange={handleChange}
         />
-      </div>
+      </article>
     </div>
   );
 };

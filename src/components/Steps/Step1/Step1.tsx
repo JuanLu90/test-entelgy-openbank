@@ -14,24 +14,24 @@ const Step1: React.FC = () => {
 
   return (
     <div className="step1">
-      <div className="step1__boxes">
-        <div>
+      <article className="step1__boxes">
+        <section>
           <img src={brainImage} alt="brain" />
           <p>{t("step1.brainDescription")}</p>
-        </div>
-        <div>
+        </section>
+        <section>
           <img src={lockImage} alt="lock" />
           <p>{t("step1.lockDescription")}</p>
-        </div>
-      </div>
-      <div className="step1__howWorks">
+        </section>
+      </article>
+      <article className="step1__howWorks">
         <h4>{t("step1.howWorks.title")}</h4>
         <p>{t("step1.howWorks.description")}</p>
-      </div>
-      <div className="step1__saveData">
+      </article>
+      <article className="step1__saveData">
         <h4>{t("step1.saveData.title")}</h4>
         <p>{t("step1.saveData.description")}</p>
-      </div>
+      </article>
     </div>
   );
 };

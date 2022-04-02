@@ -28,7 +28,7 @@ const Header: React.FC<IWizardHeader> = (props) => {
   );
 
   return (
-    <div className="wizard__header">
+    <header className="wizard__header">
       {steps.map((step, i) => {
         return (
           <div
@@ -43,7 +43,7 @@ const Header: React.FC<IWizardHeader> = (props) => {
           </div>
         );
       })}
-    </div>
+    </header>
   );
 };
 

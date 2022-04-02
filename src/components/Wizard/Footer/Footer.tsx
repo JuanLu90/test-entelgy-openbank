@@ -22,7 +22,7 @@ const Footer: React.FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div className="wizard__footer">
+    <footer className="wizard__footer">
       {activeStep === 3 ? (
         <div className="thirdStepButton">
           <button
@@ -48,7 +48,7 @@ const Footer: React.FC<IProps> = (props) => {
           </button>
         </div>
       )}
-    </div>
+    </footer>
   );
 };
 

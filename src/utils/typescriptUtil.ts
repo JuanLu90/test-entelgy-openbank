@@ -34,6 +34,9 @@ interface IStep2 {
     clue: string;
   };
   handleChange: React.ChangeEventHandler<HTMLInputElement>;
+  setCredentials: React.SetStateAction<any>;
+  initialCredentials: ICredentials;
+  setErrorState: React.SetStateAction<any>;
 }
 
 interface IStep3 {

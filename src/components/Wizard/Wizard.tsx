@@ -1,5 +1,5 @@
 // DEPENDENCES
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 // COMPONENTS
@@ -115,13 +115,6 @@ const Wizard: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (activeStep.position === 1) {
-      setCredentials(initialCredentials);
-      setStatusResponse({ status: 0 });
-    }
-  }, [activeStep, initialCredentials]);
-
   return (
     <div className="wizard">
       <Header
@@ -129,7 +122,7 @@ const Wizard: React.FC = () => {
         setSteps={setSteps}
         steps={steps}
       />
-      <div className="wizard__body">
+      <main className="wizard__body">
         {activeStep.position !== 3 && <h2> {t("wizard.title")}</h2>}
         {activeStep.position === 1 && <Step1 />}
         {activeStep.position === 2 && (
@@ -137,12 +130,15 @@ const Wizard: React.FC = () => {
             credentials={credentials}
             errorState={errorState}
             handleChange={handleChange}
+            setCredentials={setCredentials}
+            initialCredentials={initialCredentials}
+            setErrorState={setErrorState}
           />
         )}
         {activeStep.position === 3 && (
           <Step3 loading={loading} response={statusResponse} />
         )}
-      </div>
+      </main>
       <Footer
         activeStep={activeStep.position}
         setActiveStep={setActiveStep}
