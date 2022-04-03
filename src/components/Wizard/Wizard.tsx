@@ -60,7 +60,6 @@ const Wizard: React.FC = () => {
       isDone: false,
     },
   ]);
-  const [counter, setCounter] = useState(0);
 
   const [activeStep, setActiveStep] = useState<IStep>(steps[0]);
   const [statusResponse, setStatusResponse] = useState<IResponse>({
