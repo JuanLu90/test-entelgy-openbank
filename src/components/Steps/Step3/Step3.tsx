@@ -19,7 +19,7 @@ const Step3: React.FC<IStep3> = (props) => {
 
   return (
     <div className="step3">
-      {loading && <div className="spinner" />}
+      {loading && <div className="spinner" data-testid="spinner" />}
 
       {response.status === 200 && (
         <div className="messageInfo">
